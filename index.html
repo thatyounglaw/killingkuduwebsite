@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Killing Kudu — Eugene, Oregon's Most Enthusiastic Cover Band</title>
+  <meta name="description" content="Killing Kudu is a local dad band playing the covers you already love in Eugene, Oregon. Breweries, wineries, backyards, saloons. Loud early, home by eleven.">
+
+  <!-- Social share cards -->
+  <meta property="og:title" content="Killing Kudu — Eugene, Oregon">
+  <meta property="og:description" content="A local dad band playing the covers you already love, with more enthusiasm than strictly necessary.">
+  <!-- If you add a custom domain, update this absolute URL -->
+  <meta property="og:image" content="https://thatyounglaw.github.io/killingkuduwebsite/assets/img/og-card.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Killing Kudu",
+    "genre": "Cover band",
+    "foundingLocation": { "@type": "Place", "name": "Eugene, Oregon" },
+    "description": "A local dad band playing covers in the Eugene, Oregon area."
+  }
+  </script>
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts are self-hosted in assets/fonts/ — fast, private, works offline -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#shows">Skip to content</a>
+
+  <!-- ================= SVG LIBRARY (hand-drawn, reusable) ================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- The kudu: long face, big ears, corkscrew horns. Drawn by hand, by a robot. -->
+      <symbol id="kudu-head" viewBox="0 0 200 240">
+        <g class="k-ink">
+          <!-- ears -->
+          <path d="M118,106 C136,92 156,86 168,92 C162,106 144,120 122,126 C117,120 115,111 118,106 Z"/>
+          <path d="M82,106 C64,92 44,86 32,92 C38,106 56,120 78,126 C83,120 85,111 82,106 Z"/>
+          <!-- head -->
+          <path d="M100,86 C84,86 76,97 76,112 C76,132 84,152 89,170 C93,186 94,200 100,206 C106,200 107,186 111,170 C116,152 124,132 124,112 C124,97 116,86 100,86 Z"/>
+        </g>
+        <!-- horns: three tapering strokes per side -->
+        <g class="k-horn" fill="none" stroke-linecap="round">
+          <path stroke-width="9"   d="M109,92 C126,83 133,70 124,57"/>
+          <path stroke-width="6.5" d="M124,57 C115,45 118,33 130,25"/>
+          <path stroke-width="4"   d="M130,25 C140,18 144,9 140,2"/>
+          <path stroke-width="9"   d="M91,92 C74,83 67,70 76,57"/>
+          <path stroke-width="6.5" d="M76,57 C85,45 82,33 70,25"/>
+          <path stroke-width="4"   d="M70,25 C60,18 56,9 60,2"/>
+        </g>
+        <!-- face markings: chevron, eyes, nose -->
+        <g class="k-cut">
+          <path d="M100,134 L88,121 L92,116 L100,125 L108,116 L112,121 Z"/>
+          <circle cx="87" cy="123" r="3.1"/>
+          <circle cx="113" cy="123" r="3.1"/>
+          <path d="M94,196 C96,201 104,201 106,196 C104,193 96,193 94,196 Z"/>
+        </g>
+      </symbol>
+
+      <!-- small horns-only glyph for the nav / footer -->
+      <symbol id="kudu-horns" viewBox="0 0 100 100">
+        <g fill="none" stroke="currentColor" stroke-linecap="round">
+          <path stroke-width="11" d="M56,96 C72,84 79,68 69,53"/>
+          <path stroke-width="8"  d="M69,53 C60,40 63,27 76,19"/>
+          <path stroke-width="5"  d="M76,19 C86,13 90,6 88,1"/>
+          <path stroke-width="11" d="M44,96 C28,84 21,68 31,53"/>
+          <path stroke-width="8"  d="M31,53 C40,40 37,27 24,19"/>
+          <path stroke-width="5"  d="M24,19 C14,13 10,6 12,1"/>
+        </g>
+      </symbol>
+
+      <!-- running kudu silhouette (for the stampede, obviously) -->
+      <symbol id="kudu-run" viewBox="0 0 140 90">
+        <g fill="currentColor">
+          <path d="M18,38 C30,28 52,26 72,30 C88,33 100,32 108,26 L118,34 C110,44 94,48 78,46 L74,62 L82,84 L74,84 L64,64 L52,62 L44,84 L36,84 L40,60 C28,56 16,50 18,38 Z"/>
+          <path d="M108,26 C104,18 106,10 114,6 M114,6 C108,4 104,2 106,0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="113" cy="30" r="1.6" fill="var(--paper,#f1e6cd)"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="#top" aria-label="Killing Kudu — back to top">
+      <svg class="nav__glyph" aria-hidden="true"><use href="#kudu-horns"/></svg>
+      <span class="nav__name" data-umlaut>Killing Kudu</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#shows">Shows</a>
+      <a href="#videos">Videos</a>
+      <a href="#photos">Photos</a>
+      <a href="#band">The Band</a>
+      <a href="#book" class="nav__cta">Book Us</a>
+    </nav>
+  </header>
+
+  <!-- ================= HERO POSTER ================= -->
+  <section class="hero" aria-label="Killing Kudu">
+    <div class="hero__sunburst" aria-hidden="true"></div>
+    <div class="hero__frame">
+      <div class="hero__ornament" aria-hidden="true">✦ &nbsp;✦ &nbsp;✦</div>
+
+      <svg class="hero__arc" viewBox="0 0 400 90" aria-hidden="true">
+        <path id="arcPath" d="M 30,88 A 175,150 0 0 1 370,88" fill="none"/>
+        <text class="hero__arc-text">
+          <textPath href="#arcPath" startOffset="50%" text-anchor="middle">EUGENE &#183; OREGON</textPath>
+        </text>
+      </svg>
+
+      <button class="hero__kudu" id="heroKudu" aria-label="The kudu. Click it a few times, see what happens.">
+        <svg viewBox="0 0 200 240" aria-hidden="true"><use href="#kudu-head"/></svg>
+      </button>
+
+      <h1 class="hero__title" data-umlaut>
+        <span class="hero__title-top">Killing</span>
+        <span class="hero__title-main">Kudu</span>
+      </h1>
+
+      <div class="hero__ribbon">
+        <p class="hero__tagline" id="tagline" aria-live="polite">Eugene's most enthusiastic cover band.</p>
+      </div>
+
+      <div class="hero__ctas">
+        <a class="btn btn--ticket" href="#shows">Upcoming Shows</a>
+        <a class="btn btn--ghost" href="#book">Book the Band</a>
+      </div>
+
+      <p class="hero__fineprint" data-umlaut>All covers &#183; No shame &#183; Some twang</p>
+    </div>
+  </section>
+
+  <!-- ================= MARQUEE STRIP ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- ================= SHOWS ================= -->
+  <section class="section" id="shows">
+    <header class="section__head">
+      <span class="section__eyebrow">Appearances of Note</span>
+      <h2 class="section__title" data-umlaut>Shows</h2>
+    </header>
+
+    <div class="shows__upcoming" id="upcomingShows"><!-- rendered from data.js --></div>
+
+    <div class="ledger">
+      <h3 class="ledger__title" data-umlaut>The Gig Ledger</h3>
+      <p class="ledger__sub" id="ledgerCount"></p>
+      <ol class="ledger__list" id="pastShows" reversed><!-- rendered from data.js --></ol>
+    </div>
+  </section>
+
+  <!-- ================= VIDEOS ================= -->
+  <section class="section section--dark" id="videos">
+    <header class="section__head">
+      <span class="section__eyebrow">Field Recordings</span>
+      <h2 class="section__title" data-umlaut>Videos</h2>
+      <p class="section__blurb">Captured live, mixed by physics.</p>
+    </header>
+    <div class="videos__grid" id="videoGrid"><!-- rendered from data.js --></div>
+    <p class="videos__more"><a id="youtubeLink" href="#" target="_blank" rel="noopener">More on YouTube &#8599;</a></p>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section class="section" id="photos">
+    <header class="section__head">
+      <span class="section__eyebrow">The Evidence</span>
+      <h2 class="section__title" data-umlaut>Photos &amp; Posters</h2>
+    </header>
+    <div class="gallery" id="gallery"><!-- rendered from data.js --></div>
+  </section>
+
+  <!-- ================= THE BAND ================= -->
+  <section class="section section--band" id="band">
+    <header class="section__head">
+      <span class="section__eyebrow">The Suspects</span>
+      <h2 class="section__title" data-umlaut>The Band</h2>
+      <p class="section__blurb">Four dads, five decades of songs, one shared delusion.</p>
+    </header>
+    <div class="band__grid" id="bandGrid"><!-- rendered from data.js --></div>
+  </section>
+
+  <!-- ================= BOOKING ================= -->
+  <section class="section section--book" id="book">
+    <div class="book__poster">
+      <header class="section__head">
+        <span class="section__eyebrow">Hire These Men</span>
+        <h2 class="section__title" id="bookHeadline" data-umlaut>Böök the Bänd</h2>
+      </header>
+      <p class="book__copy" id="bookCopy"></p>
+      <ul class="book__bullets" id="bookBullets"></ul>
+      <div class="book__ctas" id="bookCtas"></div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <svg class="footer__glyph" aria-hidden="true"><use href="#kudu-horns"/></svg>
+    <p class="footer__line">&copy; <span id="year"></span> Killing Kudu &#183; Eugene, Oregon</p>
+    <p class="footer__joke">No kudus were harmed. Several egos were.</p>
+    <button class="footer__umlaut" id="umlautBtn" title="Ünlëäsh thë ümläüts">&#252;</button>
+  </footer>
+
+  <!-- ================= LIGHTBOX ================= -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lightbox__close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+    <figure class="lightbox__fig">
+      <img class="lightbox__img" id="lbImg" src="" alt="">
+      <figcaption class="lightbox__cap" id="lbCap"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next photo">&#8250;</button>
+  </div>
+
+  <!-- toast + stampede live here -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="stampede" id="stampede" aria-hidden="true"></div>
+
+  <script src="data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

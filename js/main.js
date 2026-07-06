@@ -115,6 +115,61 @@
   })();
 
   /* ============================================================
+     THE KUDUFIER — feed it a song, watch the needle
+     ============================================================ */
+  (function kudufier() {
+    const K = D.kuduWay;
+    if (!K || !K.specimens || !K.specimens.length) {
+      const s = $("#method");
+      if (s) s.remove();
+      return;
+    }
+    $("#methodIntro").textContent = K.intro || "";
+    $("#kudufierPlaque").textContent = K.plaque || "";
+
+    const songEl = $("#kudufierSong"), artistEl = $("#kudufierArtist"),
+          noteEl = $("#kudufierNote"), needle = $("#kudufierNeedle"),
+          panel = document.querySelector(".kudufier");
+
+    // shuffled order so every visit starts somewhere new,
+    // then loops without immediate repeats
+    const order = K.specimens.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    let pos = -1;
+
+    function run() {
+      pos = (pos + 1) % order.length;
+      const sp = K.specimens[order[pos]];
+      panel.classList.add("is-swapping");
+      needle.style.transform = "rotate(0deg)"; // reset swing
+      setTimeout(() => {
+        songEl.textContent = sp.song;
+        artistEl.textContent = sp.artist;
+        noteEl.textContent = sp.note;
+        panel.classList.remove("is-swapping");
+        // treatment -100..100 -> needle -70deg..70deg
+        const deg = Math.max(-100, Math.min(100, sp.treatment || 0)) * 0.7;
+        requestAnimationFrame(() => { needle.style.transform = `rotate(${deg}deg)`; });
+      }, 320);
+    }
+
+    $("#kudufierBtn").addEventListener("click", run);
+
+    // fire the first specimen when the machine scrolls into view
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) { run(); io.disconnect(); }
+      }, { threshold: 0.4 });
+      io.observe(panel);
+    } else {
+      run();
+    }
+  })();
+
+  /* ============================================================
      VIDEOS: click-to-load YouTube (fast page, no trackers on load)
      ============================================================ */
   (function videos() {

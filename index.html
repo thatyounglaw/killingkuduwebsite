@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Killing Kudu — Eugene, Oregon's Most Enthusiastic Cover Band</title>
-  <meta name="description" content="Killing Kudu is a local dad band playing the covers you already love in Eugene, Oregon. Breweries, wineries, backyards, saloons. Loud early, home by eleven.">
+  <meta name="description" content="Killing Kudu is a local dad band in Eugene, Oregon playing covers the Kudu way: a little bit country, a little bit grunge. Breweries, wineries, backyards, saloons. Loud early, home by eleven.">
 
   <!-- Social share cards -->
   <meta property="og:title" content="Killing Kudu — Eugene, Oregon">
-  <meta property="og:description" content="A local dad band playing the covers you already love, with more enthusiasm than strictly necessary.">
+  <meta property="og:description" content="A little bit country. A little bit grunge. Entirely covers. Eugene, Oregon's most enthusiastic dad band.">
   <!-- If you add a custom domain, update this absolute URL -->
   <meta property="og:image" content="https://thatyounglaw.github.io/killingkuduwebsite/assets/img/og-card.jpg">
   <meta property="og:type" content="website">
@@ -19,9 +19,16 @@
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": "Killing Kudu",
-    "genre": "Cover band",
+    "genre": ["Country rock", "Grunge", "Cover band"],
+    "foundingDate": "2022-09-18",
     "foundingLocation": { "@type": "Place", "name": "Eugene, Oregon" },
-    "description": "A local dad band playing covers in the Eugene, Oregon area."
+    "description": "A local dad band playing covers the Kudu way — a little bit country, a little bit grunge — in the Eugene, Oregon area.",
+    "member": [
+      { "@type": "Person", "name": "Jason Vaughn", "roleName": "Lead vocals, guitar" },
+      { "@type": "Person", "name": "Matt Lawless", "roleName": "Lead guitar" },
+      { "@type": "Person", "name": "Brian Liddy", "roleName": "Bass, vocals" },
+      { "@type": "Person", "name": "Geoff Gill", "roleName": "Drums" }
+    ]
   }
   </script>
 
@@ -76,6 +83,12 @@
         </g>
       </symbol>
 
+      <!-- a whisper of grit for the big headline (screen-print wobble) -->
+      <filter id="grit">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.05" numOctaves="2" seed="7" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/>
+      </filter>
+
       <!-- running kudu silhouette (for the stampede, obviously) -->
       <symbol id="kudu-run" viewBox="0 0 140 90">
         <g fill="currentColor">
@@ -95,6 +108,7 @@
     </a>
     <nav class="nav__links" aria-label="Sections">
       <a href="#shows">Shows</a>
+      <a href="#method">The Kudu Way</a>
       <a href="#videos">Videos</a>
       <a href="#photos">Photos</a>
       <a href="#band">The Band</a>
@@ -158,6 +172,62 @@
     </div>
   </section>
 
+  <!-- ================= THE KUDU WAY / THE KUDUFIER ================= -->
+  <section class="section section--method" id="method">
+    <header class="section__head">
+      <span class="section__eyebrow">Field Notes</span>
+      <h2 class="section__title" data-umlaut>The Kudu Way</h2>
+      <p class="section__blurb" id="methodIntro"></p>
+    </header>
+
+    <div class="kudufier" aria-label="The Kudufier — a machine that demonstrates how the band treats a cover song">
+      <div class="kudufier__nameplate">
+        <span class="kudufier__brand" data-umlaut>The Kudufier</span>
+        <span class="kudufier__patent">U.S. Pat. Pending &#183; legal is in the band</span>
+      </div>
+
+      <div class="kudufier__io">
+        <div class="kudufier__slot">
+          <span class="kudufier__slot-label">Intake</span>
+          <span class="kudufier__song" id="kudufierSong">&nbsp;</span>
+          <span class="kudufier__artist" id="kudufierArtist">&nbsp;</span>
+        </div>
+
+        <div class="kudufier__dialbox">
+          <span class="kudufier__slot-label">Treatment applied</span>
+          <svg class="kudufier__dial" viewBox="0 0 220 130" aria-hidden="true">
+            <path class="kd-arc" d="M 30,110 A 80,80 0 0 1 190,110" fill="none"/>
+            <g class="kd-ticks">
+              <line x1="110" y1="30" x2="110" y2="42"/>
+              <line x1="53.4" y1="53.4" x2="61.9" y2="61.9" transform="rotate(0)"/>
+              <line x1="166.6" y1="53.4" x2="158.1" y2="61.9"/>
+              <line x1="34" y1="90" x2="45" y2="93"/>
+              <line x1="186" y1="90" x2="175" y2="93"/>
+            </g>
+            <text class="kd-label" x="26" y="128" text-anchor="start">+ TWANG</text>
+            <text class="kd-label kd-label--mid" x="110" y="20" text-anchor="middle">UNTOUCHED</text>
+            <text class="kd-label" x="194" y="128" text-anchor="end">+ CRUNCH</text>
+            <g id="kudufierNeedle" class="kd-needle-group">
+              <line class="kd-needle" x1="110" y1="110" x2="110" y2="38"/>
+            </g>
+            <circle class="kd-hub" cx="110" cy="110" r="7"/>
+          </svg>
+        </div>
+
+        <div class="kudufier__slot kudufier__slot--report">
+          <span class="kudufier__slot-label">Lab report</span>
+          <p class="kudufier__note" id="kudufierNote">&nbsp;</p>
+        </div>
+      </div>
+
+      <div class="kudufier__controls">
+        <button class="btn btn--ticket" id="kudufierBtn">Feed it another one</button>
+      </div>
+
+      <p class="kudufier__plaque" id="kudufierPlaque"></p>
+    </div>
+  </section>
+
   <!-- ================= VIDEOS ================= -->
   <section class="section section--dark" id="videos">
     <header class="section__head">
@@ -183,7 +253,7 @@
     <header class="section__head">
       <span class="section__eyebrow">The Suspects</span>
       <h2 class="section__title" data-umlaut>The Band</h2>
-      <p class="section__blurb">Four dads, five decades of songs, one shared delusion.</p>
+      <p class="section__blurb">Four dads: two doctors, one lawyer, one heavy-equipment man. Practices two or three times a quarter, which is plenty.</p>
     </header>
     <div class="band__grid" id="bandGrid"><!-- rendered from data.js --></div>
   </section>

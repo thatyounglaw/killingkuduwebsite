@@ -214,6 +214,71 @@ window.KUDU = {
     },
   ],
 
+  /* ---------- KUDUDES (the fans) -----------------------------
+     Our fans are Kududes. This section runs the fan features.
+
+     THE TWO FORMS (join the list / request a song) need somewhere
+     to send what people type. A static site can't catch form data
+     on its own, so you have two easy options:
+
+       EASIEST — email fallback: just fill in contact.bookingEmail
+         above. The buttons then open the fan's email app with a
+         pre-written message to you. Zero setup.
+
+       NICER — a free form service (recommended: formspree.io):
+         make a free account, create a form, and paste its endpoint
+         URL into listEndpoint / requestEndpoint below. Submissions
+         then land in your inbox without the fan leaving the page.
+
+     If both are empty, the forms show a friendly "coming soon" note
+     instead of breaking. Nothing to worry about.                 */
+  fans: {
+    intro: "Our fans are Kududes. There is no membership fee, no secret handshake, and no realistic path to exclusivity. If you've seen us once, you're in. If you haven't, you're pre-approved.",
+
+    listEndpoint: "",      // e.g. "https://formspree.io/f/abcxyz"  (the herd list)
+    requestEndpoint: "",   // e.g. "https://formspree.io/f/defuvw"  (song requests)
+
+    /* ----- THE KUDUDE HONOR ROLL -----------------------------
+       A hall of fame for the fans who make it worth doing.       */
+    honorRoll: [
+      { name: "Katie & Greg",            note: "Handed us their backyard and a stage to open for Ben Rue. Snacks: legendary." },
+      { name: "Brian's birthday guests", note: "Witnessed the very first Killing Kudu show, September 18, 2022, and came back anyway." },
+      { name: "Stephanie Lansdon",       note: "Sat in on “Shallow” and out-sang all of us. We've never fully recovered." },
+      { name: "Kris Ferry",              note: "Welcomed the herd to Abbelone Vineyard and let dad rock into wine country." },
+      { name: "Every barrel at the barrel room", note: "Sat through an entire set without complaint. Model audience." },
+      { name: "Babies delivered by Geoff",       note: "The most exclusive tier of Kudude. Came for the OB/GYN, stayed for the drums." },
+    ],
+
+    /* ----- WHAT THE KUDUDES SAY ------------------------------
+       Starter quotes — swap in real ones as fans say nice (or
+       funny) things. Keep attributions light unless someone is
+       happy to be named.                                          */
+    testimonials: [
+      { quote: "They played a Stapleton song and a Pearl Jam song back to back and somehow it worked.", who: "A mom at the 5th Street Market" },
+      { quote: "I came for the karaoke and stayed for whatever this was.", who: "Twisted River regular" },
+      { quote: "Best band I've seen whose drummer also delivered my daughter.", who: "A very specific fan" },
+      { quote: "You can tell they've practiced. Not a lot. But you can tell.", who: "Somebody's neighbor" },
+      { quote: "Three whiskey songs. I counted. Ten out of ten.", who: "Front row, Abbelone" },
+      { quote: "My husband won't stop talking about the flannel.", who: "Reluctant attendee, now a Kudude" },
+    ],
+
+    /* ----- MEMBERSHIP-CARD HONORIFICS ------------------------
+       Each Kudude gets one of these on their card, chosen by their
+       name so it never changes on them. Add your own!             */
+    honorifics: [
+      "Licensed Flannel Operator",
+      "Certified to yell “one more!”",
+      "Knows all the words to none of them",
+      "Whiskey-Song Enthusiast, First Class",
+      "Backyard-Show Tested",
+      "Honorary Member of the Rhythm Section",
+      "Survived a full set of covers",
+      "Requests “Freebird” ironically",
+      "Dances like the dads are watching",
+      "Permanently front row (spiritually)",
+    ],
+  },
+
   /* ---------- BOOKING COPY ------------------------------------ */
   booking: {
     headline: "Böök the bänd",

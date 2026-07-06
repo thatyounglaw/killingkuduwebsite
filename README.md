@@ -30,7 +30,8 @@ itself a minute later. Everything is a list of plain-English entries:
 | ----------------------- | --------------------------- |
 | Shows (new gig, fix a date) | `shows:` — one entry per gig. Anything dated today-or-later shows under **Upcoming**; older entries drop into the **Gig Ledger** automatically. You never move them yourself. |
 | Booking email / Instagram | `contact:` — fill in the empty quotes and the Book Us buttons appear. |
-| Band member names & bios | `members:` — **currently fun placeholders. Put the real dads in!** |
+| Band member bios        | `members:` — the real lineup, with adjustable jokes. |
+| The Kudufier            | `kuduWay:` — the twang/crunch machine. Each `specimen` is a song you've actually played: `treatment` is where the needle lands (−100 = max twang added, +100 = max crunch, 0 = untouched) and `note` is the lab report. Add new ones as the set evolves. |
 | Rotating hero taglines  | `taglines:` |
 | The scrolling sign      | `marquee:` |
 | Videos                  | `videos:` — paste the 11-character ID from any YouTube URL (`watch?v=THIS_PART`). |
@@ -86,6 +87,8 @@ locally, just open `index.html` in a browser.
 - **Type `kudu`** anywhere on the page. The ümläüts were always meant
   to be there. (The little `ü` button in the footer does it too.)
 - **Click the kudu** in the hero five times.
+- **The Kudufier's specimens are all real** — every song it processes
+  came from your own YouTube setlists. The machine only speaks truth.
 - There's a message in the browser console for visitors of a certain
   disposition.
 - The scrolling letterboard is an homage to a certain saloon's marquee.

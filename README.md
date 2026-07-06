@@ -15,10 +15,6 @@ on GitHub.
 4. Wait a minute or two. Your site is live at:
    `https://thatyounglaw.github.io/killingkuduwebsite/`
 
-Want `killingkudu.com` someday? Buy the domain, add it in that same
-Pages settings screen, and follow GitHub's prompts. That's the whole
-process.
-
 ---
 
 ## ✏️ Everyday edits — you only ever touch `data.js`

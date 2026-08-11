@@ -287,6 +287,254 @@
     }
   })();
 
+  /* ============================================================
+     KUDUDES — the fan section
+     ============================================================ */
+  (function kududes() {
+    const F = D.fans;
+    if (!F) { const s = $("#kududes"); if (s) s.remove(); return; }
+    $("#kududesIntro").textContent = F.intro || "";
+
+    /* ---- tiny stable string hash (so a name always maps the same) ---- */
+    function hash(str, seed) {
+      let h = seed >>> 0;
+      for (let i = 0; i < str.length; i++) { h = ((h << 5) + h + str.charCodeAt(i)) >>> 0; }
+      return h;
+    }
+
+    /* ---------- 1. MEMBERSHIP CARD ---------------------------- */
+    (function card() {
+      const canvas = $("#cardCanvas");
+      if (!canvas || !canvas.getContext) return;
+      const ctx = canvas.getContext("2d");
+      const W = 1000, H = 630, S = 2;         // draw in 1000x630, output 2x
+      const PAPER = "#f2e7cf", INK = "#2b1b12", RUST = "#a63d2a",
+            TEAL = "#3d7068", MAROON = "#5f2317";
+
+      // the kudu head, as an SVG stamp (cuts filled with paper so they read as holes)
+      const kuduSVG =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240">' +
+        '<g fill="' + INK + '">' +
+        '<path d="M118,106 C136,92 156,86 168,92 C162,106 144,120 122,126 C117,120 115,111 118,106 Z"/>' +
+        '<path d="M82,106 C64,92 44,86 32,92 C38,106 56,120 78,126 C83,120 85,111 82,106 Z"/>' +
+        '<path d="M100,86 C84,86 76,97 76,112 C76,132 84,152 89,170 C93,186 94,200 100,206 C106,200 107,186 111,170 C116,152 124,132 124,112 C124,97 116,86 100,86 Z"/>' +
+        '</g>' +
+        '<g fill="none" stroke="' + INK + '" stroke-linecap="round">' +
+        '<path stroke-width="9" d="M109,92 C126,83 133,70 124,57"/>' +
+        '<path stroke-width="6.5" d="M124,57 C115,45 118,33 130,25"/>' +
+        '<path stroke-width="4" d="M130,25 C140,18 144,9 140,2"/>' +
+        '<path stroke-width="9" d="M91,92 C74,83 67,70 76,57"/>' +
+        '<path stroke-width="6.5" d="M76,57 C85,45 82,33 70,25"/>' +
+        '<path stroke-width="4" d="M70,25 C60,18 56,9 60,2"/>' +
+        '</g>' +
+        '<g fill="' + PAPER + '">' +
+        '<path d="M100,134 L88,121 L92,116 L100,125 L108,116 L112,121 Z"/>' +
+        '<circle cx="87" cy="123" r="3.1"/><circle cx="113" cy="123" r="3.1"/>' +
+        '<path d="M94,196 C96,201 104,201 106,196 C104,193 96,193 94,196 Z"/>' +
+        '</g></svg>';
+
+      let assets = null;
+      function ensure() {
+        if (assets) return assets;
+        const crest = new Image();
+        const crestP = new Promise((res) => { crest.onload = () => res(crest); crest.onerror = () => res(null); });
+        crest.src = "data:image/svg+xml;utf8," + encodeURIComponent(kuduSVG);
+        const fontsP = document.fonts && document.fonts.load
+          ? Promise.all([
+              document.fonts.load('64px "Alfa Slab One"'),
+              document.fonts.load('20px "Oswald"'),
+              document.fonts.load('italic 24px "Lora"'),
+              document.fonts.load('20px "Rye"'),
+            ]).catch(() => {})
+          : Promise.resolve();
+        assets = Promise.all([crestP, fontsP]).then(([c]) => ({ crest: c }));
+        return assets;
+      }
+
+      function fitFont(text, family, startPx, maxWidth, minPx) {
+        let px = startPx;
+        do {
+          ctx.font = px + 'px "' + family + '"';
+          if (ctx.measureText(text).width <= maxWidth) break;
+          px -= 2;
+        } while (px > minPx);
+        return px;
+      }
+
+      let currentUrl = null;
+      async function draw(rawName) {
+        const { crest } = await ensure();
+        const name = (rawName || "").trim() || "Future Kudude";
+        const NAME = name.toUpperCase();
+        const num = String((hash(name.toLowerCase(), 5381) % 8900) + 100).padStart(4, "0");
+        const honor = (F.honorifics && F.honorifics.length)
+          ? F.honorifics[hash(name.toLowerCase(), 7) % F.honorifics.length] : "";
+        const year = new Date().getFullYear();
+
+        canvas.width = W * S; canvas.height = H * S;
+        ctx.setTransform(S, 0, 0, S, 0, 0);
+        ctx.textBaseline = "alphabetic";
+
+        // background + borders
+        ctx.fillStyle = PAPER; ctx.fillRect(0, 0, W, H);
+        ctx.strokeStyle = INK; ctx.lineWidth = 6; ctx.strokeRect(20, 20, W - 40, H - 40);
+        ctx.lineWidth = 2; ctx.strokeRect(32, 32, W - 64, H - 64);
+
+        ctx.textAlign = "center";
+
+        // eyebrow
+        ctx.fillStyle = RUST; ctx.letterSpacing = "8px";
+        ctx.font = '20px "Oswald"';
+        ctx.fillText("★  OFFICIAL KUDUDE  ★", W / 2, 74);
+        ctx.fillStyle = TEAL; ctx.letterSpacing = "4px"; ctx.font = '14px "Oswald"';
+        ctx.fillText("KILLING KUDU · FAN IN GOOD STANDING", W / 2, 98);
+        ctx.letterSpacing = "0px";
+
+        // crest
+        if (crest) { const cw = 92, ch = cw * 240 / 200; ctx.drawImage(crest, W / 2 - cw / 2, 112, cw, ch); }
+
+        // name
+        ctx.fillStyle = INK;
+        const npx = fitFont(NAME, "Alfa Slab One", 74, W - 200, 30);
+        ctx.font = npx + 'px "Alfa Slab One"';
+        ctx.fillText(NAME, W / 2, 340);
+
+        // honorific
+        ctx.fillStyle = MAROON; ctx.font = 'italic 24px "Lora"';
+        ctx.fillText(honor, W / 2, 384);
+
+        // divider
+        ctx.strokeStyle = "rgba(43,27,18,.35)"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(150, 418); ctx.lineTo(W - 150, 418); ctx.stroke();
+
+        // member no. (left) + since (right)
+        ctx.fillStyle = TEAL; ctx.letterSpacing = "3px"; ctx.font = '13px "Oswald"';
+        ctx.textAlign = "left";  ctx.fillText("MEMBER", 160, 468);
+        ctx.textAlign = "right"; ctx.fillText("IN THE HERD SINCE", W - 160, 468);
+        ctx.letterSpacing = "0px"; ctx.fillStyle = RUST; ctx.font = '40px "Alfa Slab One"';
+        ctx.textAlign = "left";  ctx.fillText("No. " + num, 160, 512);
+        ctx.textAlign = "right"; ctx.fillText(String(year), W - 160, 512);
+
+        // footer
+        ctx.fillStyle = INK; ctx.textAlign = "center";
+        ctx.letterSpacing = "2px"; ctx.font = '13px "Oswald"';
+        ctx.fillText("EUGENE, OREGON  ·  DUES: APPLAUSE  ·  BENEFITS: NONE", W / 2, 575);
+        ctx.letterSpacing = "0px";
+
+        // wire up the download
+        const dl = $("#cardDownload");
+        canvas.toBlob((blob) => {
+          if (!blob) return;
+          if (currentUrl) URL.revokeObjectURL(currentUrl);
+          currentUrl = URL.createObjectURL(blob);
+          dl.href = currentUrl;
+          dl.download = "kudude-card-" + (name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "member") + ".png";
+        }, "image/png");
+        return dl;
+      }
+
+      draw("");   // initial demo card
+      $("#cardForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const dl = await draw($("#cardName").value);
+        if (dl) { dl.hidden = false; toast("Welcome to the herd 🦌"); }
+      });
+    })();
+
+    /* ---------- 7. HONOR ROLL --------------------------------- */
+    (function honor() {
+      const list = $("#honorList");
+      (F.honorRoll || []).forEach((h) => {
+        const li = el("li", null,
+          `<span class="honor__name">${esc(h.name)}</span>` +
+          (h.note ? `<span class="honor__note">${esc(h.note)}</span>` : ""));
+        list.appendChild(li);
+      });
+    })();
+
+    /* ---------- 9. TESTIMONIALS ------------------------------- */
+    (function says() {
+      const items = F.testimonials || [];
+      const wrap = document.querySelector(".says");
+      if (!items.length) { if (wrap) wrap.remove(); return; }
+      const q = $("#sayQuote"), who = $("#sayWho"), dots = $("#sayDots");
+      let i = 0, timer = null;
+
+      items.forEach((_, idx) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "Quote " + (idx + 1));
+        b.addEventListener("click", () => { show(idx); reset(); });
+        dots.appendChild(b);
+      });
+
+      function show(n) {
+        i = (n + items.length) % items.length;
+        wrap.classList.add("is-fading");
+        setTimeout(() => {
+          q.textContent = items[i].quote;
+          who.textContent = items[i].who ? "— " + items[i].who : "";
+          [...dots.children].forEach((d, idx) =>
+            d.setAttribute("aria-current", idx === i ? "true" : "false"));
+          wrap.classList.remove("is-fading");
+        }, 340);
+      }
+      function reset() { clearInterval(timer); timer = setInterval(() => show(i + 1), 6000); }
+      show(0); reset();
+    })();
+
+    /* ---------- 4 + 5. THE TWO FORMS -------------------------- */
+    function wireForm(opts) {
+      const form = $(opts.form), msg = $(opts.msg);
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const value = $(opts.field).value.trim();
+        if (!value) return;
+        const endpoint = (D.fans[opts.endpointKey] || "").trim();
+        const email = D.contact && D.contact.bookingEmail;
+
+        function say(text, cls) { msg.textContent = text; msg.className = "fanform__msg " + (cls || ""); }
+
+        if (endpoint) {
+          say("Sending…", "");
+          fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify(opts.payload(value)),
+          }).then((r) => {
+            if (r.ok) { say(opts.ok, "is-good"); form.reset(); }
+            else { say("Hmm, that didn't go through. Try again, or catch us at a show.", "is-bad"); }
+          }).catch(() => say("Couldn't reach the server. Try again later.", "is-bad"));
+        } else if (email) {
+          const m = opts.mail(value, email);
+          window.location.href = m;
+          say("Opening your email app… hit send and you're in.", "is-good");
+          form.reset();
+        } else {
+          say(opts.soon, "");
+        }
+      });
+    }
+
+    wireForm({
+      form: "#joinForm", msg: "#joinMsg", field: "#joinEmail", endpointKey: "listEndpoint",
+      payload: (v) => ({ email: v, list: "Kududes" }),
+      mail: (v, to) => "mailto:" + to + "?subject=" + encodeURIComponent("Add me to the Kududes list") +
+        "&body=" + encodeURIComponent("Sign me up for the herd. My email: " + v),
+      ok: "You're in the herd. We'll holler when we're playing.",
+      soon: "The sign-up list is warming up — for now, follow along on Instagram or flag us down at a show.",
+    });
+
+    wireForm({
+      form: "#requestForm", msg: "#requestMsg", field: "#requestSong", endpointKey: "requestEndpoint",
+      payload: (v) => ({ request: v, from: "Kududes site" }),
+      mail: (v, to) => "mailto:" + to + "?subject=" + encodeURIComponent("Kudu cover request") +
+        "&body=" + encodeURIComponent("The Kududes would like you to consider: " + v),
+      ok: "Filed with the Kudufier. No promises, but no song is safe.",
+      soon: "The request box is almost open — for now, shout it at us between songs. We're listening.",
+    });
+  })();
+
   /* ---------- footer year ---------- */
   $("#year").textContent = new Date().getFullYear();
 

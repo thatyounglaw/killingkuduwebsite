@@ -28,6 +28,7 @@ itself a minute later. Everything is a list of plain-English entries:
 | Booking email / Instagram | `contact:` — fill in the empty quotes and the Book Us buttons appear. |
 | Band member bios        | `members:` — the real lineup, with adjustable jokes. |
 | The Kudufier            | `kuduWay:` — the twang/crunch machine. Each `specimen` is a song you've actually played: `treatment` is where the needle lands (−100 = max twang added, +100 = max crunch, 0 = untouched) and `note` is the lab report. Add new ones as the set evolves. |
+| Kududes (the fan section) | `fans:` — the Honor Roll, testimonials, membership-card honorifics, and the two form endpoints (see below). |
 | Rotating hero taglines  | `taglines:` |
 | The scrolling sign      | `marquee:` |
 | Videos                  | `videos:` — paste the 11-character ID from any YouTube URL (`watch?v=THIS_PART`). |
@@ -43,6 +44,22 @@ The one dated Aug 15, 2026 with the yellow "sample — edit data.js" tag.
 Replace it with a real gig (or delete it) when you're ready.
 
 ---
+
+## 🤠 The Kududes forms (join the herd / request a song)
+
+The fan section has two forms. A GitHub Pages site can't catch form data by
+itself, so pick whichever is easier — both live in the `fans:` block of `data.js`:
+
+- **Easiest — email fallback:** fill in `contact.bookingEmail`. The buttons
+  then open the fan's email app with a pre-written message to you. No accounts,
+  no setup.
+- **Nicer — a free form service:** make a free [Formspree](https://formspree.io)
+  account, create two forms, and paste their URLs into `listEndpoint` (the herd
+  list) and `requestEndpoint` (song requests). Submissions land in your inbox
+  and the fan never leaves the page.
+
+If both are blank, the forms show a friendly "coming soon" note instead of
+breaking — so it's safe to launch without them and add them later.
 
 ## 📷 Adding a photo to the gallery
 
@@ -85,6 +102,9 @@ locally, just open `index.html` in a browser.
 - **Click the kudu** in the hero five times.
 - **The Kudufier's specimens are all real** — every song it processes
   came from your own YouTube setlists. The machine only speaks truth.
+- **Make yourself a Kudude card** in the fan section — type a name, hit
+  "Make it official," download the membership card. Everyone gets a stable
+  member number and a randomly-assigned honorific.
 - There's a message in the browser console for visitors of a certain
   disposition.
 - The scrolling letterboard is an homage to a certain saloon's marquee.

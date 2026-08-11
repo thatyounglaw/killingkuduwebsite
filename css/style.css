@@ -664,6 +664,149 @@ body::before {
 .member__stat b { color: var(--rust); }
 
 /* ============================================================
+   KUDUDES (the fans)
+   ============================================================ */
+.section--kududes {
+  background: var(--paper);
+  border-top: 3px solid var(--ink);
+}
+
+/* --- membership card generator --- */
+.kudude-card { max-width: 620px; margin: 0 auto 3rem; }
+.kudude-card__stage {
+  border: 3px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--rust);
+  background:
+    repeating-linear-gradient(45deg, rgba(43,27,18,.04) 0 8px, transparent 8px 16px),
+    #fbf4e3;
+  padding: clamp(.8rem, 3vw, 1.4rem);
+  transform: rotate(-1deg);
+  transition: transform .2s ease;
+}
+.kudude-card__stage:hover { transform: rotate(0deg); }
+#cardCanvas { width: 100%; height: auto; display: block; }
+
+.kudude-card__form { text-align: center; margin-top: 1.6rem; }
+.kudude-card__label {
+  display: block;
+  font-family: var(--font-cond);
+  font-size: .7rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--rust); margin-bottom: .6rem;
+}
+.kudude-card__row {
+  display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center;
+}
+.kudude-input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: .7rem 1rem;
+  border: 2px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  min-width: 0;
+  flex: 1 1 240px;
+  max-width: 340px;
+}
+.kudude-input:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
+.kudude-card__download {
+  display: inline-block; margin-top: 1rem;
+  font-family: var(--font-cond); font-size: .8rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--teal);
+  text-decoration-thickness: 2px; text-underline-offset: 4px;
+}
+.kudude-card__download[hidden] { display: none; }
+
+/* --- honor roll + testimonials grid --- */
+.kududes__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2rem;
+  max-width: 980px;
+  margin: 0 auto 2.6rem;
+}
+.kududes__subtitle {
+  font-family: var(--font-rye);
+  font-size: 1.25rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--maroon);
+  margin: 0 0 .3rem;
+}
+.kududes__note { margin: 0 0 1.1rem; font-style: italic; font-size: .9rem; opacity: .8; }
+
+.honor__list { list-style: none; margin: 0; padding: 0; }
+.honor__list li {
+  padding: .6rem 0;
+  border-bottom: 1px dashed rgba(43,27,18,.28);
+}
+.honor__name {
+  font-family: var(--font-slab); font-size: 1rem;
+  display: block;
+}
+.honor__note { font-size: .88rem; font-style: italic; opacity: .82; }
+
+.says__card {
+  margin: 0;
+  background: var(--teal-pale);
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--teal);
+  padding: 1.6rem 1.4rem 1.3rem;
+  min-height: 9rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+.says__card::before {
+  content: "\201C";
+  position: absolute; top: -.2rem; left: .6rem;
+  font-family: var(--font-slab); font-size: 3.5rem; color: var(--rust); opacity: .5;
+}
+.says__quote {
+  margin: 0 0 .7rem; padding-left: 1.4rem;
+  font-size: 1.05rem; line-height: 1.45;
+  transition: opacity .35s ease;
+}
+.says__who {
+  font-family: var(--font-cond); font-size: .76rem;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--maroon);
+  padding-left: 1.4rem;
+  transition: opacity .35s ease;
+}
+.says.is-fading .says__quote, .says.is-fading .says__who { opacity: 0; }
+.says__dots { display: flex; gap: .4rem; justify-content: center; margin-top: 1rem; }
+.says__dots button {
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1.5px solid var(--ink); background: transparent; padding: 0;
+}
+.says__dots button[aria-current="true"] { background: var(--rust); border-color: var(--rust); }
+
+/* --- fan forms --- */
+.kududes__forms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.fanform {
+  background: #fbf4e3;
+  border: 2px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 1.5rem 1.4rem;
+}
+.fanform__row { display: flex; flex-wrap: wrap; gap: .7rem; }
+.fanform__row .kudude-input { flex: 1 1 180px; max-width: none; }
+.fanform__row .btn { flex: 0 0 auto; }
+.fanform__msg {
+  margin: .9rem 0 0; min-height: 1.2em;
+  font-size: .88rem; font-style: italic;
+}
+.fanform__msg.is-good { color: var(--teal); font-style: normal; }
+.fanform__msg.is-bad { color: var(--rust); }
+
+@media (max-width: 720px) {
+  .kududes__grid, .kududes__forms { grid-template-columns: 1fr; gap: 1.8rem; }
+}
+
+/* ============================================================
    BOOKING
    ============================================================ */
 .section--book {

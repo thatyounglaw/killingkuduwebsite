@@ -112,6 +112,7 @@
       <a href="#videos">Videos</a>
       <a href="#photos">Photos</a>
       <a href="#band">The Band</a>
+      <a href="#kududes">Kududes</a>
       <a href="#book" class="nav__cta">Book Us</a>
     </nav>
   </header>
@@ -256,6 +257,76 @@
       <p class="section__blurb">Four dads: two doctors, one lawyer, one heavy-equipment man. Practices two or three times a quarter, which is plenty.</p>
     </header>
     <div class="band__grid" id="bandGrid"><!-- rendered from data.js --></div>
+  </section>
+
+  <!-- ================= KUDUDES (the fans) ================= -->
+  <section class="section section--kududes" id="kududes">
+    <header class="section__head">
+      <span class="section__eyebrow">The Herd</span>
+      <h2 class="section__title" data-umlaut>Kududes</h2>
+      <p class="section__blurb" id="kududesIntro"></p>
+    </header>
+
+    <!-- 1. MEMBERSHIP CARD GENERATOR -->
+    <div class="kudude-card">
+      <div class="kudude-card__stage">
+        <canvas id="cardCanvas" width="2000" height="1260" role="img"
+                aria-label="Your official Kudude membership card"></canvas>
+      </div>
+      <form class="kudude-card__form" id="cardForm" autocomplete="off">
+        <label class="kudude-card__label" for="cardName">Print your card</label>
+        <div class="kudude-card__row">
+          <input class="kudude-input" type="text" id="cardName" name="cardName"
+                 maxlength="26" placeholder="Your name, Kudude" aria-label="Your name">
+          <button class="btn btn--ticket" type="submit">Make it official</button>
+        </div>
+        <a class="kudude-card__download" id="cardDownload" hidden download="kudude-card.png">Download your card &#8595;</a>
+      </form>
+    </div>
+
+    <div class="kududes__grid">
+      <!-- 7. HONOR ROLL -->
+      <div class="honor">
+        <h3 class="kududes__subtitle" data-umlaut>The Kudude Honor Roll</h3>
+        <p class="kududes__note">The fans who make it worth carrying the PA.</p>
+        <ul class="honor__list" id="honorList"><!-- from data.js --></ul>
+      </div>
+
+      <!-- 9. TESTIMONIALS -->
+      <div class="says">
+        <h3 class="kududes__subtitle" data-umlaut>What the Kududes Say</h3>
+        <figure class="says__card">
+          <blockquote class="says__quote" id="sayQuote">&nbsp;</blockquote>
+          <figcaption class="says__who" id="sayWho">&nbsp;</figcaption>
+        </figure>
+        <div class="says__dots" id="sayDots" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- 4 + 5. JOIN THE HERD  &  PETITION THE BAND -->
+    <div class="kududes__forms">
+      <form class="fanform" id="joinForm" autocomplete="off">
+        <h3 class="kududes__subtitle" data-umlaut>Join the Herd</h3>
+        <p class="kududes__note">Most of our shows are word of mouth. Be the mouth. We'll only email when we're playing somewhere.</p>
+        <div class="fanform__row">
+          <input class="kudude-input" type="email" id="joinEmail" name="email" required
+                 placeholder="you@email.com" aria-label="Your email">
+          <button class="btn btn--ticket" type="submit">Count me in</button>
+        </div>
+        <p class="fanform__msg" id="joinMsg" role="status"></p>
+      </form>
+
+      <form class="fanform" id="requestForm" autocomplete="off">
+        <h3 class="kududes__subtitle" data-umlaut>Petition the Band</h3>
+        <p class="kududes__note">Think you've got a song the Kudufier should take a crack at? Make your case.</p>
+        <div class="fanform__row">
+          <input class="kudude-input" type="text" id="requestSong" name="song" required
+                 placeholder="Song &mdash; Artist" aria-label="Song and artist">
+          <button class="btn btn--ticket" type="submit">Submit for review</button>
+        </div>
+        <p class="fanform__msg" id="requestMsg" role="status"></p>
+      </form>
+    </div>
   </section>
 
   <!-- ================= BOOKING ================= -->

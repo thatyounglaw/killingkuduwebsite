@@ -65,7 +65,7 @@
     const all = (D.shows || []).slice().filter((s) => s && s.date);
     const upcoming = all.filter((s) => parseDate(s.date) >= today)
                         .sort((a, b) => parseDate(a.date) - parseDate(b.date));
-    const past = all.filter((s) => parseDate(s.date) < today)
+    const past = all.filter((s) => parseDate(s.date) < today && !s.sample)
                     .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
     // -- upcoming cards
@@ -74,6 +74,8 @@
       up.appendChild(el("div", "shows__empty",
         `Nothing on the calendar right now. The dads are resting.<br>
          Change that: <a href="#book">book us for something</a>.`));
+      const heroBtn = $("#heroShowsBtn");
+      if (heroBtn) { heroBtn.textContent = "Watch Us Live"; heroBtn.href = "#videos"; }
     } else {
       upcoming.forEach((s) => {
         const dt = parseDate(s.date);
@@ -282,8 +284,13 @@
       ctas.appendChild(a);
     }
     if (!c.bookingEmail && !c.instagram) {
+      if (c.youtube) {
+        const a = el("a", "btn btn--ghost", "Find us on YouTube");
+        a.href = c.youtube; a.target = "_blank"; a.rel = "noopener";
+        ctas.appendChild(a);
+      }
       ctas.appendChild(el("p", "book__hint",
-        "Booking buttons appear here once you add an email or Instagram link in data.js. For now: flag us down at a show."));
+        "Best way to reach us right now: flag us down at a show. We're the ones carrying the PA."));
     }
   })();
 
@@ -486,6 +493,12 @@
     /* ---------- 4 + 5. THE TWO FORMS -------------------------- */
     function wireForm(opts) {
       const form = $(opts.form), msg = $(opts.msg);
+      if (!(D.fans[opts.endpointKey] || "").trim() && !(D.contact && D.contact.bookingEmail)) {
+        form.remove();
+        const box = document.querySelector(".kududes__forms");
+        if (box && !box.querySelector("form")) box.remove();
+        return;
+      }
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const value = $(opts.field).value.trim();
@@ -505,13 +518,10 @@
             if (r.ok) { say(opts.ok, "is-good"); form.reset(); }
             else { say("Hmm, that didn't go through. Try again, or catch us at a show.", "is-bad"); }
           }).catch(() => say("Couldn't reach the server. Try again later.", "is-bad"));
-        } else if (email) {
-          const m = opts.mail(value, email);
-          window.location.href = m;
+        } else {
+          window.location.href = opts.mail(value, email);
           say("Opening your email app… hit send and you're in.", "is-good");
           form.reset();
-        } else {
-          say(opts.soon, "");
         }
       });
     }
@@ -522,7 +532,6 @@
       mail: (v, to) => "mailto:" + to + "?subject=" + encodeURIComponent("Add me to the Kududes list") +
         "&body=" + encodeURIComponent("Sign me up for the herd. My email: " + v),
       ok: "You're in the herd. We'll holler when we're playing.",
-      soon: "The sign-up list is warming up — for now, follow along on Instagram or flag us down at a show.",
     });
 
     wireForm({
@@ -531,7 +540,6 @@
       mail: (v, to) => "mailto:" + to + "?subject=" + encodeURIComponent("Kudu cover request") +
         "&body=" + encodeURIComponent("The Kududes would like you to consider: " + v),
       ok: "Filed with the Kudufier. No promises, but no song is safe.",
-      soon: "The request box is almost open — for now, shout it at us between songs. We're listening.",
     });
   })();
 

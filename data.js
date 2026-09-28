@@ -73,24 +73,19 @@ window.KUDU = {
        note:  optional one-liner
        link:  optional URL for tickets/details ("" = no link)
        sample:true  marks an entry as a demo — it renders with
-                    an "edit me" tag. Delete the flag (or the
-                    entry) once you add real shows.            */
+                    an "edit me" tag while upcoming, and never
+                    appears in the Gig Ledger once its date passes. */
   shows: [
-    {
-      date: "2026-08-15",
-      venue: "Twisted River Saloon",
-      city: "Eugene, OR",
-      time: "8:00 PM",
-      note: "This is a sample entry so you can see how a show looks. Edit or delete it in data.js!",
-      link: "",
-      sample: true,
-    },
+    /* ----- upcoming gigs go here. Copy this shape: -----
+    { date: "2026-11-14", venue: "Twisted River Saloon", city: "Eugene, OR",
+      time: "8:00 PM", note: "", link: "" },
+    */
 
     /* ----- past gigs (dates are best-effort; fix freely) ----- */
     { date: "2026-07-04", venue: "5th Street Public Market", city: "Eugene, OR",
       note: "Independence Day — live near the Butte to Butte finish line" },
     { date: "2025-12-14", venue: "A very festive barrel room", city: "Eugene, OR",
-      note: "Holiday show. We forget which barrel room — edit data.js" },
+      note: "Holiday show in a barrel room. Which barrel room is lost to history." },
     { date: "2025-05-01", venue: "Venue 252", city: "Eugene, OR",
       note: "Fundraiser for Eugene Emergency Physicians" },
     { date: "2025-04-05", venue: "Twisted River Saloon", city: "Eugene, OR",
@@ -230,8 +225,8 @@ window.KUDU = {
          URL into listEndpoint / requestEndpoint below. Submissions
          then land in your inbox without the fan leaving the page.
 
-     If both are empty, the forms show a friendly "coming soon" note
-     instead of breaking. Nothing to worry about.                 */
+     If both are empty, the forms stay hidden until you fill one in,
+     so nobody types into a box that goes nowhere.                */
   fans: {
     intro: "Our fans are Kududes. There is no membership fee, no secret handshake, and no realistic path to exclusivity. If you've seen us once, you're in. If you haven't, you're pre-approved.",
 

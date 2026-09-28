@@ -38,10 +38,17 @@ itself a minute later. Everything is a list of plain-English entries:
 `"YYYY-MM-DD"`. If the site ever looks broken after an edit, you
 probably lost a comma — check the last thing you changed.
 
-### There's a sample show in the list
+### Adding a show
 
-The one dated Aug 15, 2026 with the yellow "sample — edit data.js" tag.
-Replace it with a real gig (or delete it) when you're ready.
+There's a commented-out example at the top of `shows:` — copy its shape.
+With nothing upcoming, the site says so politely and the hero's main button
+switches to **Watch Us Live** instead of pointing at an empty list.
+
+### Until the booking email is filled in
+
+The **Book Us** section still shows the pitch, but its buttons fall back to
+a YouTube link and "flag us down at a show." Fill in `contact.bookingEmail`
+(and `instagram`) and the real buttons appear.
 
 ---
 
@@ -58,8 +65,8 @@ itself, so pick whichever is easier — both live in the `fans:` block of `data.
   list) and `requestEndpoint` (song requests). Submissions land in your inbox
   and the fan never leaves the page.
 
-If both are blank, the forms show a friendly "coming soon" note instead of
-breaking — so it's safe to launch without them and add them later.
+If both are blank, the forms simply stay hidden, so fans never type into
+a box that goes nowhere. They appear on their own once either is filled in.
 
 ## 📷 Adding a photo to the gallery
 

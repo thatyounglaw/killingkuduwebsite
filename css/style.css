@@ -139,7 +139,8 @@ body::before {
   font-size: .8rem; letter-spacing: 1.4em; padding-left: 1.4em;
   margin-bottom: .3rem;
 }
-.hero__arc { width: min(340px, 80%); margin: 0 auto -0.6rem; display: block; overflow: visible; }
+/* the arc's text rises ~13% of its width above the svg box, so clear that under the stars */
+.hero__arc { width: min(340px, 80%); margin: calc(min(340px, 80%) * .15) auto -0.6rem; display: block; overflow: visible; }
 .hero__arc-text {
   font-family: var(--font-cond); font-weight: 600;
   font-size: 22px; letter-spacing: .34em;
@@ -576,6 +577,24 @@ body::before {
 }
 
 /* ============================================================
+   PROOF OF LIFE — one real photo of the band, right under the hero
+   ============================================================ */
+.proof {
+  width: calc(100% - 2rem); max-width: 900px;
+  margin: 3.5rem auto 0;
+  padding: .7rem .7rem 0;
+  background: #fbf4e3;
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-.6deg);
+}
+.proof img { display: block; width: 100%; height: auto; }
+.proof figcaption {
+  padding: .6rem .2rem .7rem;
+  font-style: italic; font-size: .9rem; text-align: center;
+}
+
+/* ============================================================
    GALLERY
    ============================================================ */
 .gallery {
@@ -898,17 +917,18 @@ body::before {
    ============================================================ */
 .toast {
   position: fixed; left: 50%; bottom: 1.6rem;
-  transform: translate(-50%, 200%);
+  transform: translate(-50%, calc(100% + 2rem));
+  visibility: hidden;
   z-index: 70;
   background: var(--ink); color: var(--paper);
   border: 2px solid var(--gold);
   font-family: var(--font-cond); letter-spacing: .1em; text-transform: uppercase;
   font-size: .85rem;
   padding: .6rem 1.2rem;
-  transition: transform .35s cubic-bezier(.2, 1.4, .4, 1);
+  transition: transform .35s cubic-bezier(.2, 1.4, .4, 1), visibility 0s linear .35s;
   pointer-events: none;
 }
-.toast.is-showing { transform: translate(-50%, 0); }
+.toast.is-showing { transform: translate(-50%, 0); visibility: visible; transition-delay: 0s; }
 
 .stampede { position: fixed; inset: 0; pointer-events: none; z-index: 65; overflow: hidden; }
 .stampede__kudu {
@@ -926,6 +946,11 @@ body::before {
    ============================================================ */
 @media (max-width: 640px) {
   .nav { position: static; flex-direction: column; gap: .3rem; padding-bottom: .5rem; }
+  .nav__links { flex-wrap: wrap; justify-content: center; row-gap: .45rem; }
+  .nav__links a { white-space: nowrap; }
+  .gallery { columns: 2; column-gap: .7rem; }
+  .gallery__item { margin-bottom: .7rem; box-shadow: 3px 3px 0 var(--ink); }
+  .gallery__cap { font-size: .72rem; }
   .show-card { grid-template-columns: auto 1fr; }
   .show-card__right { grid-column: 1 / -1; text-align: left; border-top: 2px dashed rgba(43,27,18,.35); padding-top: .6rem; }
   .ledger__note { padding-left: 0; }

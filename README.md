@@ -17,6 +17,69 @@ on GitHub.
 
 ---
 
+## 🌐 The domain: killingkudu.com
+
+The site lives at **https://killingkudu.com**. The `CNAME` file in this
+repo tells GitHub Pages which domain is ours; the DNS records at the domain
+registrar (Whois.com) point the domain at GitHub. Both halves are needed.
+
+**DNS records** (set these in the registrar's DNS manager for `killingkudu.com`):
+
+| Type    | Host / Name | Value                      |
+| ------- | ----------- | -------------------------- |
+| `A`     | `@`         | `185.199.108.153`          |
+| `A`     | `@`         | `185.199.109.153`          |
+| `A`     | `@`         | `185.199.110.153`          |
+| `A`     | `@`         | `185.199.111.153`          |
+| `AAAA`  | `@`         | `2606:50c0:8000::153`      |
+| `AAAA`  | `@`         | `2606:50c0:8001::153`      |
+| `AAAA`  | `@`         | `2606:50c0:8002::153`      |
+| `AAAA`  | `@`         | `2606:50c0:8003::153`      |
+| `CNAME` | `www`       | `thatyounglaw.github.io`   |
+
+Delete any other `A`, `AAAA`, or `www` records the registrar added by
+default (parking pages, "coming soon", domain forwarding).
+
+**Then, on GitHub:** **Settings → Pages → Custom domain** should read
+`killingkudu.com` (the `CNAME` file fills it in). Once the DNS check turns
+green, tick **Enforce HTTPS**. The certificate can take up to an hour
+to appear after DNS starts working.
+
+**If the domain ever changes:** update `CNAME`, plus the `https://killingkudu.com`
+links near the top of `index.html` (they're what Facebook/iMessage use for the
+link preview card).
+
+---
+
+## 🔒 Keeping it safe
+
+The site itself is hard to hack: it's plain files with no logins, no
+database, and no server code. The ways a band site actually gets hurt are
+someone getting into an **account**, the **domain** slipping away, or
+**personal info** leaking out. So:
+
+- **GitHub:** turn on two-factor login (profile picture → Settings →
+  Password and authentication). Whoever controls this GitHub account
+  controls the site.
+- **Whois.com (the domain):** a strong, unique password plus two-factor on
+  the account, and **auto-renew ON**. The domain renews every July, and
+  an expired domain can be bought by anyone. Leave the transfer lock on
+  (it already is).
+- **Verify the domain with GitHub** so nobody else's GitHub Pages site can
+  claim it: profile picture → Settings → Pages → **Add a domain** →
+  `killingkudu.com`. GitHub shows a `TXT` record; add it at Whois.com, then
+  click **Verify**.
+- **Never add a wildcard `*` DNS record** pointing at GitHub. That also
+  opens the door to domain takeover.
+- **Everything in this repo is public**, including `originals/` and the old
+  versions in the edit history. No passwords, no private phone numbers, and
+  use a band email (not someone's personal one) for `bookingEmail`.
+- **Photos carry their GPS location.** Before uploading, turn it off: on an
+  iPhone, tap **Options** at the top of the Share sheet and switch
+  **Location** off. That matters most for anything shot at someone's house.
+
+---
+
 ## ✏️ Everyday edits — you only ever touch `data.js`
 
 Open **`data.js`**, click the pencil icon, edit, commit. The site updates
@@ -79,7 +142,8 @@ a box that goes nowhere. They appear on their own once either is filled in.
    jumping while it loads).
 
 Original full-resolution photos live in `originals/` — they're not used
-by the site, they're just safe there.
+by the site, they're just safe there. They're still public, so strip the
+location first (see **Keeping it safe** above).
 
 ---
 
@@ -95,6 +159,7 @@ assets/img/       web-sized photos (+ thumbs/)
 assets/fonts/     the four typefaces, self-hosted (fast + private)
 originals/        untouched original photos
 404.html          for pages that took a solo and never came back
+CNAME             the domain name (killingkudu.com) — GitHub Pages reads it
 ```
 
 No build step. No dependencies. Nothing to install, ever. To preview

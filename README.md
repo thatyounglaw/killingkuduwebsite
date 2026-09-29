@@ -51,6 +51,35 @@ link preview card).
 
 ---
 
+## 🔒 Keeping it safe
+
+The site itself is hard to hack: it's plain files with no logins, no
+database, and no server code. The ways a band site actually gets hurt are
+someone getting into an **account**, the **domain** slipping away, or
+**personal info** leaking out. So:
+
+- **GitHub:** turn on two-factor login (profile picture → Settings →
+  Password and authentication). Whoever controls this GitHub account
+  controls the site.
+- **Whois.com (the domain):** a strong, unique password plus two-factor on
+  the account, and **auto-renew ON**. The domain renews every July, and
+  an expired domain can be bought by anyone. Leave the transfer lock on
+  (it already is).
+- **Verify the domain with GitHub** so nobody else's GitHub Pages site can
+  claim it: profile picture → Settings → Pages → **Add a domain** →
+  `killingkudu.com`. GitHub shows a `TXT` record; add it at Whois.com, then
+  click **Verify**.
+- **Never add a wildcard `*` DNS record** pointing at GitHub. That also
+  opens the door to domain takeover.
+- **Everything in this repo is public**, including `originals/` and the old
+  versions in the edit history. No passwords, no private phone numbers, and
+  use a band email (not someone's personal one) for `bookingEmail`.
+- **Photos carry their GPS location.** Before uploading, turn it off: on an
+  iPhone, tap **Options** at the top of the Share sheet and switch
+  **Location** off. That matters most for anything shot at someone's house.
+
+---
+
 ## ✏️ Everyday edits — you only ever touch `data.js`
 
 Open **`data.js`**, click the pencil icon, edit, commit. The site updates
@@ -113,7 +142,8 @@ a box that goes nowhere. They appear on their own once either is filled in.
    jumping while it loads).
 
 Original full-resolution photos live in `originals/` — they're not used
-by the site, they're just safe there.
+by the site, they're just safe there. They're still public, so strip the
+location first (see **Keeping it safe** above).
 
 ---
 

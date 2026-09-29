@@ -29,9 +29,12 @@ window.KUDU = {
   },
 
   /* ---------- CONTACT / SOCIALS ----------------------------
-     Fill these in! Empty quotes "" just hide that button.     */
+     Fill these in! Empty quotes "" just hide that button.
+     The two @killingkudu.com addresses forward to real inboxes
+     (see "Band email" in README.md for how that's set up).     */
   contact: {
-    bookingEmail: "",          // e.g. "killingkudu@gmail.com" — shown as the big Book Us button
+    bookingEmail: "booking@killingkudu.com",  // the big Book Us button (venues, parties, weddings)
+    fanEmail: "hello@killingkudu.com",        // fan-list sign-ups & song requests (blank = use bookingEmail)
     instagram: "",             // e.g. "https://instagram.com/killingkudu"
     youtube: "https://www.youtube.com/@steamboatgeoff/videos",
   },
@@ -216,9 +219,9 @@ window.KUDU = {
      to send what people type. A static site can't catch form data
      on its own, so you have two easy options:
 
-       EASIEST — email fallback: just fill in contact.bookingEmail
+       EASIEST — email fallback: contact.fanEmail (or bookingEmail)
          above. The buttons then open the fan's email app with a
-         pre-written message to you. Zero setup.
+         pre-written message to you. Zero setup. (Already on.)
 
        NICER — a free form service (recommended: formspree.io):
          make a free account, create a form, and paste its endpoint

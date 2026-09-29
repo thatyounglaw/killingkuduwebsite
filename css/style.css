@@ -862,7 +862,7 @@ body::before {
 .section--book .btn { border-color: var(--gold); color: var(--paper); box-shadow: 3px 3px 0 var(--gold); }
 .section--book .btn--ticket { background: var(--rust); }
 .section--book .btn:hover { box-shadow: 1px 1px 0 var(--gold); }
-.book__hint { font-size: .85rem; font-style: italic; opacity: .8; }
+.book__hint { flex-basis: 100%; font-size: .85rem; font-style: italic; opacity: .8; overflow-wrap: anywhere; }
 
 /* ============================================================
    FOOTER

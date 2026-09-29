@@ -283,6 +283,9 @@
       a.href = c.instagram; a.target = "_blank"; a.rel = "noopener";
       ctas.appendChild(a);
     }
+    // Spell the address out too: the button does nothing for people
+    // whose computer has no email app set up.
+    if (c.bookingEmail) ctas.appendChild(el("p", "book__hint", "…or write to " + esc(c.bookingEmail)));
     if (!c.bookingEmail && !c.instagram) {
       if (c.youtube) {
         const a = el("a", "btn btn--ghost", "Find us on YouTube");
@@ -493,7 +496,8 @@
     /* ---------- 4 + 5. THE TWO FORMS -------------------------- */
     function wireForm(opts) {
       const form = $(opts.form), msg = $(opts.msg);
-      if (!(D.fans[opts.endpointKey] || "").trim() && !(D.contact && D.contact.bookingEmail)) {
+      const email = D.contact && (D.contact.fanEmail || D.contact.bookingEmail);
+      if (!(D.fans[opts.endpointKey] || "").trim() && !email) {
         form.remove();
         const box = document.querySelector(".kududes__forms");
         if (box && !box.querySelector("form")) box.remove();
@@ -504,7 +508,6 @@
         const value = $(opts.field).value.trim();
         if (!value) return;
         const endpoint = (D.fans[opts.endpointKey] || "").trim();
-        const email = D.contact && D.contact.bookingEmail;
 
         function say(text, cls) { msg.textContent = text; msg.className = "fanform__msg " + (cls || ""); }
 
